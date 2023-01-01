@@ -1,14 +1,9 @@
 <template>
-  <Diamond />
+  <router-view />
 </template>
 
 <script>
-import Diamond from './components/Diamond.vue'
-
 export default {
   name: 'App',
-  components: {
-    Diamond,
-  },
 }
 </script>
