@@ -1,13 +1,7 @@
 <template>
   <div>
-    <div class="topnav">
-      <div class="logo">logo</div>
-      <ul class="menu">
-        <li>菜单1</li>
-        <li>菜单2</li>
-      </ul>
-    </div>
     <div class="banner">
+      <Topnav />
       <h1>Diamond UI</h1>
       <h2>一个厉害的 UI 框架</h2>
       <p class="actions">
@@ -18,22 +12,11 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-.topnav {
-  background: #f5eed0;
-  display: flex;
-  padding: 16px;
-  > .logo {
-    max-width: 6em;
-    margin-right: auto;
-  }
-  > .menu {
-    display: flex;
-    white-space: nowrap;
-    flex-wrap: nowrap;
-    > li {
-      margin: 0 1em;
-    }
-  }
+<script lang="ts">
+import Topnav from '../components/Topnav.vue'
+export default {
+  components: { Topnav },
 }
-</style>
+</script>
+
+<style lang="scss" scoped></style>
