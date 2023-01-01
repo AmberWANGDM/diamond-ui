@@ -1,14 +1,16 @@
 import { createApp } from 'vue' // 创建app实例
 import App from './App.vue'
-import './index.css'
+import './index.scss'
 import {createWebHashHistory,createRouter} from 'vue-router'
-import Diamond from './components/Diamond.vue'
+import Home from './views/Home.vue'
+import Doc from './views/Doc.vue'
 
 const history = createWebHashHistory()
 const router = createRouter({
   history,
   routes:[
-    {path:'/',component:Diamond}
+    {path:'/',component:Home},
+    {path:'/doc',component:Doc}
   ]
 })
 
