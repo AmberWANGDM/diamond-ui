@@ -1,6 +1,6 @@
 <template>
   <div class="topnav">
-    <div class="logo">logo</div>
+    <div class="logo" @click="toggleMenu">logo</div>
     <ul class="menu">
       <li>菜单1</li>
       <li>菜单2</li>
@@ -9,7 +9,18 @@
 </template>
 
 <script lang="ts">
-export default {}
+import { inject, Ref } from 'vue'
+
+export default {
+  setup() {
+    // 注入值需要显式声明,否则是asideVisible是unknown
+    const asideVisible = inject<Ref<boolean>>('asideVisible')
+    const toggleMenu = () => {
+      asideVisible.value = !asideVisible.value
+    }
+    return { toggleMenu }
+  },
+}
 </script>
 
 <style lang="scss" scoped>
@@ -17,6 +28,8 @@ export default {}
   background: #f5eed0;
   display: flex;
   padding: 16px;
+  position: relative;
+  z-index: 10;
   > .logo {
     max-width: 6em;
     margin-right: auto;
