@@ -20,7 +20,10 @@
           </li>
         </ol>
       </aside>
-      <main>主内容</main>
+      <main>
+        <!-- 组件Demo -->
+        <router-view></router-view>
+      </main>
     </div>
   </div>
 </template>
