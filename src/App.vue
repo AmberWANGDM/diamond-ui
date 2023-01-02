@@ -11,7 +11,8 @@ export default {
     // 如果希望指定更复杂的类型,可以写成
     // const asideVisible:Ref<boolean> = ref(false)
     // 或者在调用ref时传入泛型参数,覆盖默认推导 ref<boolean>(false)
-    const asideVisible = ref(false)
+    const width = document.documentElement.clientWidth
+    const asideVisible = ref(width < 500 ? false : true)
     provide('asideVisible', asideVisible)
   },
 }
