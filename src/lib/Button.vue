@@ -1,5 +1,6 @@
 <template>
   <button class="dm-btn" :class="classes" :disabled="disabled">
+    <span v-if="loading" class="dm-loadingIndicator"></span>
     <slot />
   </button>
 </template>
@@ -13,6 +14,7 @@ export default {
     size: { type: String, default: 'normal' },
     level: { type: String, default: 'normal' },
     disabled: { type: Boolean, default: false },
+    loading: { type: Boolean, default: false },
   },
   setup(props) {
     const { theme, size, level } = props
@@ -162,6 +164,26 @@ $dark-grey: #b8b8b8;
       cursor: not-allowed;
       color: $dark-grey;
     }
+  }
+
+  > .dm-loadingIndicator {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    margin-right: 4px;
+    border-radius: 8px;
+    border-color: $blue $blue $blue transparent;
+    border-style: solid;
+    border-width: 2px;
+    animation: dm-spin 1s infinite linear;
+  }
+}
+@keyframes dm-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 </style>
