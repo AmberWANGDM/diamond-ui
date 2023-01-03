@@ -1,5 +1,5 @@
 <template>
-  <button class="dm-btn" :class="classes">
+  <button class="dm-btn" :class="classes" :disabled="disabled">
     <slot />
   </button>
 </template>
@@ -12,6 +12,7 @@ export default {
     theme: { type: String, default: 'button' },
     size: { type: String, default: 'normal' },
     level: { type: String, default: 'normal' },
+    disabled: { type: Boolean, default: false },
   },
   setup(props) {
     const { theme, size, level } = props
@@ -34,6 +35,8 @@ $color: #333;
 $blue: #3875f7;
 $radius: 4px;
 $red: #ec5b56;
+$grey: #f5f5f5;
+$dark-grey: #b8b8b8;
 .dm-btn {
   box-sizing: border-box;
   height: $h;
@@ -141,6 +144,23 @@ $red: #ec5b56;
       &:focus {
         color: darken($red, 10%);
       }
+    }
+  }
+
+  &.dm-theme-button {
+    &[disabled] {
+      cursor: not-allowed;
+      color: $dark-grey;
+      &:hover {
+        border-color: $grey;
+      }
+    }
+  }
+  &.dm-theme-link,
+  &.dm-theme-text {
+    &[disabled] {
+      cursor: not-allowed;
+      color: $dark-grey;
     }
   }
 }
