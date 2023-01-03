@@ -1,24 +1,65 @@
 <template>
-  <div class="dm-dialog-overlay"></div>
-  <div class="dm-dialog-wrapper">
-    <div class="dm-dialog">
-      <header>标题<span class="dm-dialog-close"></span></header>
-      <main>
-        <p>第一行字</p>
-        <p>第二行字</p>
-      </main>
-      <footer>
-        <Button level="main">确定</Button>
-        <Button>取消</Button>
-      </footer>
+  <template v-if="visible">
+    <div class="dm-dialog-overlay" @click="onClickOverlay"></div>
+    <div class="dm-dialog-wrapper">
+      <div class="dm-dialog">
+        <header>
+          <slot name="title" />
+          <span @click="close" class="dm-dialog-close"></span>
+        </header>
+        <main>
+          <slot name="content" />
+        </main>
+        <footer>
+          <Button level="main" @click="ok">确定</Button>
+          <Button @click="cancel">取消</Button>
+        </footer>
+      </div>
     </div>
-  </div>
+  </template>
 </template>
 
 <script lang="ts">
 import Button from './Button.vue'
 export default {
+  props: {
+    visible: {
+      type: Boolean,
+      default: false,
+    },
+    closeOnClickOverlay: {
+      type: Boolean,
+      default: true,
+    },
+    ok: {
+      type: Function,
+    },
+    cancel: {
+      type: Function,
+    },
+  },
   components: { Button },
+  setup(props, context) {
+    const close = () => {
+      context.emit('update:visible', false)
+    }
+    const onClickOverlay = () => {
+      if (props.closeOnClickOverlay) {
+        close()
+      }
+    }
+    const ok = () => {
+      if (props.ok && props.ok() !== false) {
+        close()
+      }
+    }
+    const cancel = () => {
+      if (props.cancel && props.cancel() !== false) {
+        close()
+      }
+    }
+    return { close, onClickOverlay, ok, cancel }
+  },
 }
 </script>
 <style lang="scss">
