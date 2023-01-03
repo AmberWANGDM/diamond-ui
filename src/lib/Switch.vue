@@ -1,5 +1,7 @@
 <template>
-  <button @click="toggle" :class="{ checked: value }"><span></span></button>
+  <button class="dm-switch" @click="toggle" :class="{ ' dm-checked': value }">
+    <span></span>
+  </button>
 </template>
 
 <script lang="ts">
@@ -21,7 +23,7 @@ export default {
 <style lang="scss" scoped>
 $h: 22px;
 $h2: $h - 4px;
-button {
+.dm-switch {
   height: $h;
   width: $h * 2;
   border: none;
@@ -43,7 +45,7 @@ button {
   &:hover {
     background: #8c8c8c;
   }
-  &.checked {
+  &.dm-checked {
     background-color: #3875f7;
     > span {
       left: calc(100% - #{$h2} - 2px);
@@ -60,7 +62,7 @@ button {
       width: $h2 + 5px;
     }
   }
-  &.checked:active {
+  &.dm-checked:active {
     > span {
       width: $h2 + 5px;
       margin-left: -5px;
