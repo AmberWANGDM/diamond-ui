@@ -11,13 +11,15 @@ export default {
   props: {
     theme: { type: String, default: 'button' },
     size: { type: String, default: 'normal' },
+    level: { type: String, default: 'normal' },
   },
   setup(props) {
-    const { theme, size } = props
+    const { theme, size, level } = props
     const classes = computed(() => {
       return {
         [`dm-theme-${theme}`]: theme,
         [`dm-size-${size}`]: size,
+        [`dm-level-${level}`]: level,
       }
     })
     return { classes }
@@ -29,8 +31,9 @@ export default {
 $h: 32px;
 $border-color: #d9d9d9;
 $color: #333;
-$blue: #40a9ff;
+$blue: #3875f7;
 $radius: 4px;
+$red: #ec5b56;
 .dm-btn {
   box-sizing: border-box;
   height: $h;
@@ -45,6 +48,7 @@ $radius: 4px;
   border: 1px solid $border-color;
   border-radius: $radius;
   box-shadow: 0 2px 0 rgb(0 0 0 / 2%);
+  transition: background 250ms;
   // + 组合器选择相邻元素，即后一个元素紧跟在前一个之后，并且共享同一个父节点。 语法：A + B 例子：h2 + p 会匹配所有紧邻在 <h2> (en-US) 元素后的 <p> 元素。
   & + & {
     margin-left: 8px;
@@ -61,6 +65,7 @@ $radius: 4px;
   &::-moz-focus-inner {
     border: 0;
   }
+  // theme
   &.dm-theme-link {
     border-color: transparent;
     box-shadow: none;
@@ -80,16 +85,62 @@ $radius: 4px;
     }
   }
 
+  // size
+  &.dm-size-large {
+    font-style: 24px;
+    height: 44px;
+    padding: 0 16px;
+  }
+  &.dm-size-small {
+    font-size: 12px;
+    height: 20px;
+    padding: 0 4px;
+  }
   &.dm-theme-button {
-    &.dm-size-large {
-      font-style: 24px;
-      height: 44px;
-      padding: 0 16px;
+    &.dm-level-main {
+      background: $blue;
+      color: white;
+      border-color: $blue;
+      &:hover,
+      &:focus {
+        background: darken($blue, 10%);
+        border-color: darken($blue, 10%);
+      }
     }
-    &.dm-size-small {
-      font-size: 12px;
-      height: 20px;
-      padding: 0 4px;
+    &.dm-level-danger {
+      background: $red;
+      border-color: $red;
+      color: white;
+      &:hover,
+      &:focus {
+        background: darken($red, 10%);
+        border-color: darken($red, 10%);
+      }
+    }
+  }
+  &.dm-theme-link {
+    &.dm-level-danger {
+      color: $red;
+      &:hover,
+      &:focus {
+        color: darken($red, 10%);
+      }
+    }
+  }
+  &.dm-theme-text {
+    &.dm-level-main {
+      color: $blue;
+      &:hover,
+      &:focus {
+        color: darken($blue, 10%);
+      }
+    }
+    &.dm-level-danger {
+      color: $red;
+      &:hover,
+      &:focus {
+        color: darken($red, 10%);
+      }
     }
   }
 }
