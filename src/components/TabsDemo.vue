@@ -2,8 +2,9 @@
   <div>Tabs Demo</div>
   <h1>实例1</h1>
   <Tabs v-model:selected="selectedTitle">
-    <Tab title="导航1">内容1</Tab>
-    <Tab title="导航222222">内容2</Tab>
+    <Tab title="Tab1">内容1</Tab>
+    <Tab title="Tab2">内容2</Tab>
+    <Tab title="Tab3">内容2</Tab>
   </Tabs>
 </template>
 
@@ -17,7 +18,7 @@ export default {
     Tab,
   },
   setup() {
-    const selectedTitle = ref('导航1')
+    const selectedTitle = ref('Tab1')
     return { selectedTitle }
   },
 }

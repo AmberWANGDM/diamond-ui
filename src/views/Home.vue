@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="topnavAndBanner">
     <Topnav />
     <div class="banner">
       <h1>Diamond UI</h1>
@@ -20,13 +20,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.topnavAndBanner {
+  background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
+}
 .banner {
   padding: 100px 0;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: lightgreen;
+  // background: lightgreen;
   > .actions {
     padding: 8px 0;
     a {
