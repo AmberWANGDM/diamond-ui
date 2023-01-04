@@ -1,6 +1,6 @@
 <template>
   <div class="dm-tabs">
-    <div class="dm-tabs-nav">
+    <div class="dm-tabs-nav" ref="container">
       <div
         class="dm-tabs-nav-item"
         :class="{ selected: t === selected }"
@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, onUpdated, ref } from 'vue'
 import Tab from './Tab.vue'
 export default {
   props: {
@@ -41,15 +41,22 @@ export default {
   setup(props, context) {
     // 获取子组件
     const defaults = context.slots.default()
-    // 获取nav宽度
+    // 切换
     const navItems = ref<HTMLDivElement[]>([])
     const indicator = ref<HTMLDivElement>(null)
-    onMounted(() => {
+    const container = ref<HTMLDivElement>(null)
+    const changeNav = () => {
       const divs = navItems.value
       const result = divs.filter((div) => div.classList.contains('selected'))[0]
       const { width } = result.getBoundingClientRect()
       indicator.value.style.width = width + 'px'
-    }),
+      const { left: containerLeft } = container.value.getBoundingClientRect()
+      const { left: navItemLeft } = result.getBoundingClientRect()
+      const left = navItemLeft - containerLeft
+      indicator.value.style.left = left + 'px'
+    }
+    onMounted(changeNav),
+      onUpdated(changeNav),
       // 检查子组件类型是否符合要求
       defaults.forEach((tag) => {
         if (tag.type !== Tab) {
@@ -70,7 +77,7 @@ export default {
     const select = (title: string) => {
       context.emit('update:selected', title)
     }
-    return { defaults, titles, current, select, navItems, indicator }
+    return { defaults, titles, current, select, navItems, indicator, container }
   },
 }
 </script>
@@ -105,7 +112,7 @@ $border-color: #d9d9d9;
       background: $blue;
       left: 0;
       bottom: -1px;
-      // width: 100px;
+      transition: all 0.25s ease-in-out;
     }
   }
 
