@@ -1,19 +1,10 @@
 <template>
-  <article class="markdown-body" v-html="md"></article>
-  下一节：<a href="#/doc/get-started">快速上手</a>
+  <Markdown path="../markdown/intro.md" />
 </template>
 
 <script lang="ts">
-import md from '../markdown/intro.md'
+import Markdown from '../components/Markdown.vue'
 export default {
-  data() {
-    return { md }
-  },
+  components: { Markdown },
 }
 </script>
-
-<style lang="scss" scoped>
-article {
-  margin: 30px;
-}
-</style>
