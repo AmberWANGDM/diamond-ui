@@ -94,12 +94,13 @@ $colorBg: #fafafa;
 
 aside {
   border-right: 1px solid $colorBorder;
+  background-color: $colorBg;
   width: 150px;
   padding: 6px;
   position: fixed;
   top: 0;
   left: 0;
-  padding-top: 70px;
+  padding-top: 80px;
   height: 100%;
   z-index: 2;
   > span {
