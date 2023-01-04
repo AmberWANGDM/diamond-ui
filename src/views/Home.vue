@@ -21,7 +21,12 @@ export default {
 
 <style lang="scss" scoped>
 .topnavAndBanner {
-  background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
+  background-image: linear-gradient(
+    to top,
+    #f3e7e9 0%,
+    #e3eeff 99%,
+    #e3eeff 100%
+  );
 }
 .banner {
   padding: 100px 0;
@@ -29,18 +34,21 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  // background: lightgreen;
   > .actions {
     padding: 8px 0;
     a {
-      margin: 0 8px;
-      background: #fff;
+      margin: 8px 12px;
+      font-size: 14px;
+      background-color: rgba(123, 105, 186, 0.1);
+      backdrop-filter: blur(10px);
       display: inline-block;
-      $h: 28px;
-      height: $h;
-      line-height: $h;
-      border-radius: $h/2;
-      padding: 0 8px;
+      border-radius: 18px;
+      padding: 8px 16px;
+      transition: background-color 0.5s ease-in-out;
+
+      &:hover {
+        background-color: rgba(123, 105, 186, 0.3);
+      }
     }
   }
 }
