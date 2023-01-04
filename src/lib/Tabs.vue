@@ -7,8 +7,7 @@
         @click="select(t)"
         :ref="
           (el) => {
-            // @ts-ignore
-            if (el) navItems[index] = el
+            if (t === selected) selectedItem = el
           }
         "
         v-for="(t, index) in titles"
@@ -42,16 +41,14 @@ export default {
     // 获取子组件
     const defaults = context.slots.default()
     // 切换
-    const navItems = ref<HTMLDivElement[]>([])
+    const selectedItem = ref<HTMLDivElement>(null)
     const indicator = ref<HTMLDivElement>(null)
     const container = ref<HTMLDivElement>(null)
     const changeNav = () => {
-      const divs = navItems.value
-      const result = divs.filter((div) => div.classList.contains('selected'))[0]
-      const { width } = result.getBoundingClientRect()
+      const { width } = selectedItem.value.getBoundingClientRect()
       indicator.value.style.width = width + 'px'
       const { left: containerLeft } = container.value.getBoundingClientRect()
-      const { left: navItemLeft } = result.getBoundingClientRect()
+      const { left: navItemLeft } = selectedItem.value.getBoundingClientRect()
       const left = navItemLeft - containerLeft
       indicator.value.style.left = left + 'px'
     }
@@ -77,7 +74,15 @@ export default {
     const select = (title: string) => {
       context.emit('update:selected', title)
     }
-    return { defaults, titles, current, select, navItems, indicator, container }
+    return {
+      defaults,
+      titles,
+      current,
+      select,
+      selectedItem,
+      indicator,
+      container,
+    }
   },
 }
 </script>
