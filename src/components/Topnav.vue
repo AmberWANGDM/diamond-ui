@@ -1,15 +1,26 @@
 <template>
   <div class="topnav">
     <div class="logo">
-      <svg class="icon">
-        <use xlink:href="#icon-diamond"></use>
-      </svg>
+      <router-link to="/">
+        <svg class="icon">
+          <use xlink:href="#icon-diamond"></use>
+        </svg>
+      </router-link>
     </div>
     <ul class="menu">
-      <li>菜单1</li>
-      <li>菜单2</li>
+      <li>
+        <router-link to="/doc">文档</router-link>
+      </li>
     </ul>
-    <span class="toggleAside" @click="toggleMenu"></span>
+    <span
+      v-if="toggleMenuButtonVisible"
+      class="toggleAside"
+      @click="toggleMenu"
+    >
+      <svg class="icon">
+        <use xlink:href="#icon-menu"></use>
+      </svg>
+    </span>
   </div>
 </template>
 
@@ -17,6 +28,12 @@
 import { inject, Ref } from 'vue'
 
 export default {
+  props: {
+    toggleMenuButtonVisible: {
+      type: Boolean,
+      default: false,
+    },
+  },
   setup() {
     // 注入值需要显式声明,否则是asideVisible是unknown
     const asideVisible = inject<Ref<boolean>>('asideVisible')
@@ -32,7 +49,7 @@ export default {
 .topnav {
   // background: #f5eed0;
   display: flex;
-  padding: 16px;
+  padding: 8px;
   position: fixed;
   top: 0;
   left: 0;
@@ -43,7 +60,7 @@ export default {
   > .logo {
     max-width: 6em;
     margin-right: auto;
-    > svg {
+    svg {
       width: 42px;
       height: 42px;
     }
@@ -59,12 +76,15 @@ export default {
   > .toggleAside {
     width: 24px;
     height: 24px;
-    background: red;
     position: absolute;
     left: 16px;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-60%);
     display: none;
+    > svg {
+      width: 24px;
+      height: 24px;
+    }
   }
 
   @media (max-width: 500px) {
