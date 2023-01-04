@@ -1,12 +1,11 @@
 <template>
   <div class="topnavAndBanner">
-    <Topnav />
+    <Topnav class="homeTopnav" />
     <div class="banner">
       <h1>Diamond-UI</h1>
       <h3>一个基于Vue的 UI 组件库</h3>
       <p class="actions">
-        <a href="https://github.com/AmberWANGDM/diamond-ui">GitHub</a>
-        <router-link to="/doc">开始</router-link>
+        <router-link to="/doc/get-started">快速上手</router-link>
       </p>
     </div>
   </div>
@@ -45,6 +44,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.homeTopnav {
+  background: transparent;
+  border-bottom: none;
+}
 .topnavAndBanner {
   background-image: linear-gradient(
     to top,
@@ -72,11 +75,11 @@ export default {
     padding: 8px 0;
     a {
       margin: 8px 12px;
-      font-size: 14px;
+      font-size: 18px;
       background-color: rgba(123, 105, 186, 0.1);
       backdrop-filter: blur(10px);
       display: inline-block;
-      border-radius: 18px;
+      border-radius: 8px;
       padding: 8px 16px;
       transition: background-color 0.5s ease-in-out;
 

@@ -3,7 +3,16 @@
     <Topnav toggleMenuButtonVisible class="nav" />
     <div class="content">
       <aside v-if="asideVisible">
-        <h2>组件列表</h2>
+        <span>开始</span>
+        <ol>
+          <li>
+            <router-link to="/doc/intro">简介</router-link>
+          </li>
+          <li>
+            <router-link to="/doc/get-started">快速上手</router-link>
+          </li>
+        </ol>
+        <span>组件列表</span>
         <ol>
           <li>
             <router-link to="/doc/switch">Switch 组件</router-link>
@@ -44,6 +53,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$gray: #595959;
+$colorPrimaryBgHover: #ebebeb;
+$colorBorder: #f0f0f0;
+$colorBg: #fafafa;
+.router-link-active {
+  color: #865cc1;
+  background-color: #f4ebfa;
+  border-radius: 8px;
+  &:hover {
+    background-color: #f4ebfa;
+  }
+}
 .layout {
   display: flex;
   flex-direction: column;
@@ -68,22 +89,40 @@ export default {
   > main {
     flex-grow: 1;
     padding: 16px;
-    // background: lightgreen;
   }
 }
 
 aside {
-  background: lightblue;
+  border-right: 1px solid $colorBorder;
   width: 150px;
-  padding: 16px;
+  padding: 6px;
   position: fixed;
   top: 0;
   left: 0;
   padding-top: 70px;
   height: 100%;
   z-index: 2;
-  > h2 {
-    margin-bottom: 4px;
+  > span {
+    color: $gray;
+  }
+  > ol {
+    margin-top: 8px;
+    margin-bottom: 24px;
+    > li {
+      margin-top: 2px;
+      font-size: 14px;
+      > a {
+        display: inline-block;
+        padding: 5px;
+        padding-left: 12px;
+        width: 100%;
+        transition: background-color 0.25s;
+        &:hover {
+          background-color: $colorPrimaryBgHover;
+          border-radius: 5px;
+        }
+      }
+    }
   }
 }
 

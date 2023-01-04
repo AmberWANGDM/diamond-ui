@@ -11,6 +11,13 @@
       <li>
         <router-link to="/doc">文档</router-link>
       </li>
+      <li>
+        <a href="https://github.com/AmberWANGDM/diamond-ui">
+          Github
+          <svg class="icon">
+            <use xlink:href="#icon-tiaozhuan"></use></svg
+        ></a>
+      </li>
     </ul>
     <span
       v-if="toggleMenuButtonVisible"
@@ -47,9 +54,8 @@ export default {
 
 <style lang="scss" scoped>
 .topnav {
-  // background: #f5eed0;
   display: flex;
-  padding: 8px;
+  padding: 4px 12px;
   position: fixed;
   top: 0;
   left: 0;
@@ -57,6 +63,8 @@ export default {
   z-index: 10;
   justify-content: center;
   align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+  background-color: #fff;
   > .logo {
     max-width: 6em;
     margin-right: auto;
