@@ -8,7 +8,9 @@ export default {
   props: { path: { type: String } },
   setup(props) {
     const content = ref<string>(null)
-    import(props.path).then((result) => (content.value = result.default))
+    import(props.path).then((result) => {
+      content.value = result.default
+    })
     return { content }
   },
 }
