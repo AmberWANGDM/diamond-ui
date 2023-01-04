@@ -7,6 +7,7 @@
         @click="select(t)"
         :ref="
           (el) => {
+            //@ts-ignore
             if (t === selected) selectedItem = el
           }
         "
@@ -29,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { computed, onMounted, onUpdated, ref } from 'vue'
+import { computed, onMounted, ref, watchEffect } from 'vue'
 import Tab from './Tab.vue'
 export default {
   props: {
@@ -38,28 +39,33 @@ export default {
     },
   },
   setup(props, context) {
-    // 获取子组件
-    const defaults = context.slots.default()
     // 切换
     const selectedItem = ref<HTMLDivElement>(null)
     const indicator = ref<HTMLDivElement>(null)
     const container = ref<HTMLDivElement>(null)
-    const changeNav = () => {
-      const { width } = selectedItem.value.getBoundingClientRect()
-      indicator.value.style.width = width + 'px'
-      const { left: containerLeft } = container.value.getBoundingClientRect()
-      const { left: navItemLeft } = selectedItem.value.getBoundingClientRect()
-      const left = navItemLeft - containerLeft
-      indicator.value.style.left = left + 'px'
-    }
-    onMounted(changeNav),
-      onUpdated(changeNav),
-      // 检查子组件类型是否符合要求
-      defaults.forEach((tag) => {
-        if (tag.type !== Tab) {
-          throw new Error('Tabs子标签必须为Tab')
+    onMounted(() => {
+      watchEffect(() => {
+        if (selectedItem.value && indicator.value) {
+          const { width } = selectedItem.value.getBoundingClientRect()
+          indicator.value.style.width = width + 'px'
+          const { left: containerLeft } =
+            container.value.getBoundingClientRect()
+          const { left: navItemLeft } =
+            selectedItem.value?.getBoundingClientRect()
+          const left = navItemLeft - containerLeft
+          indicator.value.style.left = left + 'px'
         }
       })
+    })
+
+    // 获取子组件
+    const defaults = context.slots.default()
+    // 检查子组件类型是否符合要求
+    defaults.forEach((tag) => {
+      if (tag.type !== Tab) {
+        throw new Error('Tabs子标签必须为Tab')
+      }
+    })
     // 显示对应的内容
     const current = computed(() => {
       return defaults.filter((tag) => {
