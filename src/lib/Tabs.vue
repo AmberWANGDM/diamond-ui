@@ -5,12 +5,18 @@
         class="dm-tabs-nav-item"
         :class="{ selected: t === selected }"
         @click="select(t)"
+        :ref="
+          (el) => {
+            // @ts-ignore
+            if (el) navItems[index] = el
+          }
+        "
         v-for="(t, index) in titles"
         :key="index"
       >
         {{ t }}
       </div>
-      <div class="dm-tabs-nav-indicator"></div>
+      <div class="dm-tabs-nav-indicator" ref="indicator"></div>
     </div>
     <div class="dm-tabs-content">
       <!-- 更新<component :is="VNode">内部插槽必须传key -->
@@ -24,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import Tab from './Tab.vue'
 export default {
   props: {
@@ -35,12 +41,21 @@ export default {
   setup(props, context) {
     // 获取子组件
     const defaults = context.slots.default()
-    // 检查子组件类型是否符合要求
-    defaults.forEach((tag) => {
-      if (tag.type !== Tab) {
-        throw new Error('Tabs子标签必须为Tab')
-      }
-    })
+    // 获取nav宽度
+    const navItems = ref<HTMLDivElement[]>([])
+    const indicator = ref<HTMLDivElement>(null)
+    onMounted(() => {
+      const divs = navItems.value
+      const result = divs.filter((div) => div.classList.contains('selected'))[0]
+      const { width } = result.getBoundingClientRect()
+      indicator.value.style.width = width + 'px'
+    }),
+      // 检查子组件类型是否符合要求
+      defaults.forEach((tag) => {
+        if (tag.type !== Tab) {
+          throw new Error('Tabs子标签必须为Tab')
+        }
+      })
     // 显示对应的内容
     const current = computed(() => {
       return defaults.filter((tag) => {
@@ -55,7 +70,7 @@ export default {
     const select = (title: string) => {
       context.emit('update:selected', title)
     }
-    return { defaults, titles, current, select }
+    return { defaults, titles, current, select, navItems, indicator }
   },
 }
 </script>
@@ -90,7 +105,7 @@ $border-color: #d9d9d9;
       background: $blue;
       left: 0;
       bottom: -1px;
-      width: 100px;
+      // width: 100px;
     }
   }
 
