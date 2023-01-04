@@ -2,13 +2,24 @@
   <div class="topnavAndBanner">
     <Topnav />
     <div class="banner">
-      <h1>Diamond UI</h1>
-      <h2>一个厉害的 UI 框架</h2>
+      <h1>Diamond-UI</h1>
+      <h3>一个基于Vue的 UI 组件库</h3>
       <p class="actions">
         <a href="https://github.com/AmberWANGDM/diamond-ui">GitHub</a>
         <router-link to="/doc">开始</router-link>
       </p>
     </div>
+  </div>
+  <div class="features">
+    <svg class="icon">
+      <use xlink:href="#icon-vue"></use>
+    </svg>
+    <svg class="icon">
+      <use xlink:href="#icon-typescript"></use>
+    </svg>
+    <svg class="icon">
+      <use xlink:href="#icon-light"></use>
+    </svg>
   </div>
 </template>
 
@@ -27,6 +38,14 @@ export default {
     #e3eeff 99%,
     #e3eeff 100%
   );
+  clip-path: ellipse(80% 60% at 50% 40%);
+}
+
+.features {
+  > svg {
+    width: 64px;
+    height: 64px;
+  }
 }
 .banner {
   padding: 100px 0;
@@ -34,6 +53,13 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  > h1 {
+    font-size: 40px;
+  }
+  > h3 {
+    margin-top: 20px;
+    color: #6b7785;
+  }
   > .actions {
     padding: 8px 0;
     a {
