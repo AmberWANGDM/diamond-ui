@@ -2,72 +2,27 @@
   <div>
     <h1>开关 Switch</h1>
     <p>互斥性的操作控件，用户可打开或关闭某个功能。</p>
-    <div class="demo">
-      <h2>基本用法</h2>
-      <div class="demo-component">
-        <component :is="Switchbasic"></component>
-      </div>
-      <div class="demo-actions">
-        <Button>查看代码</Button>
-      </div>
-      <div class="demo-code">
-        <pre
-          class="language-html"
-          v-html="
-            Prism.highlight(
-              Switchbasic.__sourceCode,
-              Prism.languages.html,
-              'html'
-            )
-          "
-        />
-      </div>
-    </div>
-    <div class="demo">
-      <h2>开关尺寸</h2>
-      <div class="demo-component">
-        <component :is="Switchsize"></component>
-      </div>
-      <div class="demo-actions">
-        <Button>查看代码</Button>
-      </div>
-      <div class="demo-code">
-        <pre>{{ Switchsize.__sourceCode }}</pre>
-      </div>
-    </div>
-    <div class="demo">
-      <h2>禁用状态</h2>
-      <div class="demo-component">
-        <component :is="Switchdisabled"></component>
-      </div>
-      <div class="demo-actions">
-        <Button>查看代码</Button>
-      </div>
-      <div class="demo-code">
-        <pre>{{ Switchdisabled.__sourceCode }}</pre>
-      </div>
-    </div>
+    <Demo :component="Switchbasic" />
+    <Demo :component="Switchsize" />
+    <Demo :component="Switchdisabled" />
   </div>
 </template>
 
 <script lang="ts">
-import { ref } from 'vue'
 import Button from '../lib/Button.vue'
 import Switchbasic from './Switchbasic.vue'
 import Switchsize from './Switchsize.vue'
 import Switchdisabled from './Switchdisabled.vue'
-import 'prismjs'
-import 'prismjs/themes/prism.css'
+import Demo from './Demo.vue'
 
 export default {
-  components: { Button },
+  components: { Button, Demo },
   setup() {
-    const Prism = (window as any).Prism
-    const bool = ref(false)
-    return { bool, Switchbasic, Switchsize, Switchdisabled, Prism }
+    return { Switchbasic, Switchsize, Switchdisabled }
   },
 }
 </script>
+
 <style lang="scss" scoped>
 $border-color: #d9d9d9;
 .demo {

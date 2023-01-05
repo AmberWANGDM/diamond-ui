@@ -105,8 +105,7 @@ $colorDanger: #ff4d4f;
   & + & {
     margin-left: 8px;
   }
-  &:hover,
-  &:focus {
+  &:hover {
     color: $colorPrimary;
     border-color: $colorPrimary;
   }
@@ -123,8 +122,7 @@ $colorDanger: #ff4d4f;
     border-color: transparent;
     background-color: $colorPrimary;
     color: #fff;
-    &:hover,
-    &:focus {
+    &:hover {
       background-color: lighten($colorPrimary, 10%);
     }
   }
@@ -140,8 +138,7 @@ $colorDanger: #ff4d4f;
     border-color: transparent;
     box-shadow: none;
     color: inherit;
-    &:hover,
-    &:focus {
+    &:hover {
       background: darken(white, 5%);
     }
   }
@@ -162,24 +159,21 @@ $colorDanger: #ff4d4f;
   &.dm-theme-primary {
     &.dm-level-success {
       background-color: $colorSuccess;
-      &:hover,
-      &:focus {
+      &:hover {
         background: lighten($colorSuccess, 5%);
         border-color: lighten($colorSuccess, 5%);
       }
     }
     &.dm-level-warning {
       background-color: $colorWarning;
-      &:hover,
-      &:focus {
+      &:hover {
         background: lighten($colorWarning, 5%);
         border-color: lighten($colorWarning, 5%);
       }
     }
     &.dm-level-danger {
       background-color: $colorDanger;
-      &:hover,
-      &:focus {
+      &:hover {
         background: lighten($colorDanger, 5%);
         border-color: lighten($colorDanger, 5%);
       }
@@ -189,8 +183,7 @@ $colorDanger: #ff4d4f;
     &.dm-level-success {
       color: $colorSuccess;
       border-color: $colorSuccess;
-      &:hover,
-      &:focus {
+      &:hover {
         color: lighten($colorSuccess, 5%);
         border-color: lighten($colorSuccess, 5%);
       }
@@ -198,8 +191,7 @@ $colorDanger: #ff4d4f;
     &.dm-level-warning {
       color: $colorWarning;
       border-color: $colorWarning;
-      &:hover,
-      &:focus {
+      &:hover {
         color: lighten($colorWarning, 5%);
         border-color: lighten($colorWarning, 5%);
       }
@@ -207,8 +199,7 @@ $colorDanger: #ff4d4f;
     &.dm-level-danger {
       color: $colorDanger;
       border-color: $colorDanger;
-      &:hover,
-      &:focus {
+      &:hover {
         color: lighten($colorDanger, 5%);
         border-color: lighten($colorDanger, 5%);
       }
@@ -250,8 +241,7 @@ $colorDanger: #ff4d4f;
     &[disabled] {
       cursor: not-allowed;
       opacity: 0.7;
-      &:hover,
-      &:focus {
+      &:hover {
         background-color: $colorPrimary;
       }
     }
@@ -270,8 +260,7 @@ $colorDanger: #ff4d4f;
     &[disabled] {
       cursor: not-allowed;
       color: $dark-grey;
-      &:hover,
-      &:focus {
+      &:hover {
         text-decoration: none;
         background: white;
       }
@@ -295,8 +284,7 @@ $colorDanger: #ff4d4f;
     }
     &.dm-loading {
       opacity: 0.8;
-      &:hover,
-      &:focus {
+      &:hover {
         cursor: default;
         background-color: $colorPrimary;
       }
@@ -305,8 +293,7 @@ $colorDanger: #ff4d4f;
   &.dm-theme-button {
     &.dm-loading {
       opacity: 0.8;
-      &:hover,
-      &:focus {
+      &:hover {
         cursor: default;
         color: $color;
         border-color: $border-color;
