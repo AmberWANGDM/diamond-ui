@@ -1,44 +1,91 @@
 <template>
-  <button class="dm-btn" :class="classes" :disabled="disabled">
+  <button
+    class="dm-btn"
+    :class="classes"
+    :disabled="disabled"
+    @click="handleClick"
+  >
     <span v-if="loading" class="dm-loadingIndicator"></span>
     <slot />
   </button>
 </template>
 
 <script lang="ts">
-import { computed } from 'vue'
+import { computed, PropType, toRefs } from 'vue'
 
 export default {
   props: {
-    theme: { type: String, default: 'button' },
-    size: { type: String, default: 'normal' },
-    level: { type: String, default: 'normal' },
+    /**
+     * 按钮的类型，分为4种：默认按钮、主要按钮、链接按钮、文字按钮
+     * @defaultValue 'button'
+     */
+    theme: {
+      type: String as PropType<'button' | 'primary' | 'link' | 'text'>,
+      default: 'button',
+    },
+    /**
+     * 按钮的尺寸：大，中，小
+     * @defaultValue 'medium'
+     */
+    size: {
+      type: String as PropType<'small' | 'large' | 'medium'>,
+      default: 'normal',
+    },
+    /**
+     * 按钮状态：成功，警告，危险
+     * @defaultValue 'normal'
+     */
+    level: {
+      type: String as PropType<'normal' | 'warning' | 'success' | 'danger'>,
+      default: 'normal',
+    },
+    /**
+     * 按钮是否禁用
+     */
     disabled: { type: Boolean, default: false },
+    /**
+     * 按钮是否为加载中状态
+     * 加载中按钮无法点击
+     */
     loading: { type: Boolean, default: false },
   },
-  setup(props) {
+  // 点击Button组件时触发
+  emits: ['click'],
+  setup(props, { emit }) {
+    const { loading } = toRefs(props)
     const { theme, size, level } = props
     const classes = computed(() => {
       return {
         [`dm-theme-${theme}`]: theme,
         [`dm-size-${size}`]: size,
         [`dm-level-${level}`]: level,
+        'dm-loading': loading.value,
       }
     })
-    return { classes }
+
+    const handleClick = (e) => {
+      if (props.disabled || props.loading) {
+        e.preventDefault()
+        return
+      }
+      emit('click', e)
+    }
+    return { classes, handleClick }
   },
 }
 </script>
 
 <style lang="scss" scoped>
-$h: 32px;
+$h: 28px;
 $border-color: #d9d9d9;
 $color: #333;
-$blue: #3875f7;
+$colorPrimary: #722ed1;
 $radius: 4px;
-$red: #ec5b56;
 $grey: #f5f5f5;
 $dark-grey: #b8b8b8;
+$colorSuccess: #52c41a;
+$colorWarning: #faad14;
+$colorDanger: #ff4d4f;
 .dm-btn {
   box-sizing: border-box;
   height: $h;
@@ -60,8 +107,8 @@ $dark-grey: #b8b8b8;
   }
   &:hover,
   &:focus {
-    color: $blue;
-    border-color: $blue;
+    color: $colorPrimary;
+    border-color: $colorPrimary;
   }
   &:focus {
     outline: none;
@@ -70,14 +117,23 @@ $dark-grey: #b8b8b8;
   &::-moz-focus-inner {
     border: 0;
   }
+
   // theme
+  &.dm-theme-primary {
+    border-color: transparent;
+    background-color: $colorPrimary;
+    color: #fff;
+    &:hover,
+    &:focus {
+      background-color: lighten($colorPrimary, 10%);
+    }
+  }
   &.dm-theme-link {
     border-color: transparent;
     box-shadow: none;
-    color: $blue;
-    &:hover,
-    &:focus {
-      color: lighten($blue, 10%);
+    color: $colorPrimary;
+    &:hover {
+      text-decoration: underline;
     }
   }
   &.dm-theme-text {
@@ -93,68 +149,119 @@ $dark-grey: #b8b8b8;
   // size
   &.dm-size-large {
     font-style: 24px;
-    height: 44px;
+    height: 36px;
     padding: 0 16px;
   }
   &.dm-size-small {
     font-size: 12px;
-    height: 20px;
+    height: 24px;
     padding: 0 4px;
   }
-  &.dm-theme-button {
-    &.dm-level-main {
-      background: $blue;
-      color: white;
-      border-color: $blue;
+
+  // level
+  &.dm-theme-primary {
+    &.dm-level-success {
+      background-color: $colorSuccess;
       &:hover,
       &:focus {
-        background: darken($blue, 10%);
-        border-color: darken($blue, 10%);
+        background: lighten($colorSuccess, 5%);
+        border-color: lighten($colorSuccess, 5%);
+      }
+    }
+    &.dm-level-warning {
+      background-color: $colorWarning;
+      &:hover,
+      &:focus {
+        background: lighten($colorWarning, 5%);
+        border-color: lighten($colorWarning, 5%);
       }
     }
     &.dm-level-danger {
-      background: $red;
-      border-color: $red;
-      color: white;
+      background-color: $colorDanger;
       &:hover,
       &:focus {
-        background: darken($red, 10%);
-        border-color: darken($red, 10%);
+        background: lighten($colorDanger, 5%);
+        border-color: lighten($colorDanger, 5%);
+      }
+    }
+  }
+  &.dm-theme-button {
+    &.dm-level-success {
+      color: $colorSuccess;
+      border-color: $colorSuccess;
+      &:hover,
+      &:focus {
+        color: lighten($colorSuccess, 5%);
+        border-color: lighten($colorSuccess, 5%);
+      }
+    }
+    &.dm-level-warning {
+      color: $colorWarning;
+      border-color: $colorWarning;
+      &:hover,
+      &:focus {
+        color: lighten($colorWarning, 5%);
+        border-color: lighten($colorWarning, 5%);
+      }
+    }
+    &.dm-level-danger {
+      color: $colorDanger;
+      border-color: $colorDanger;
+      &:hover,
+      &:focus {
+        color: lighten($colorDanger, 5%);
+        border-color: lighten($colorDanger, 5%);
       }
     }
   }
   &.dm-theme-link {
+    &.dm-level-success {
+      color: $colorSuccess;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    &.dm-level-warning {
+      color: $colorWarning;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
     &.dm-level-danger {
-      color: $red;
-      &:hover,
-      &:focus {
-        color: darken($red, 10%);
+      color: $colorDanger;
+      &:hover {
+        text-decoration: underline;
       }
     }
   }
   &.dm-theme-text {
-    &.dm-level-main {
-      color: $blue;
-      &:hover,
-      &:focus {
-        color: darken($blue, 10%);
-      }
+    &.dm-level-success {
+      color: $colorSuccess;
+    }
+    &.dm-level-warning {
+      color: $colorWarning;
     }
     &.dm-level-danger {
-      color: $red;
-      &:hover,
-      &:focus {
-        color: darken($red, 10%);
-      }
+      color: $colorDanger;
     }
   }
 
+  &.dm-theme-primary {
+    &[disabled] {
+      cursor: not-allowed;
+      opacity: 0.7;
+      &:hover,
+      &:focus {
+        background-color: $colorPrimary;
+      }
+    }
+  }
   &.dm-theme-button {
     &[disabled] {
       cursor: not-allowed;
       color: $dark-grey;
       &:hover {
-        border-color: $grey;
+        border-color: $border-color;
       }
     }
   }
@@ -163,19 +270,48 @@ $dark-grey: #b8b8b8;
     &[disabled] {
       cursor: not-allowed;
       color: $dark-grey;
+      &:hover,
+      &:focus {
+        text-decoration: none;
+        background: white;
+      }
     }
   }
-
+  // loading
   > .dm-loadingIndicator {
     width: 14px;
     height: 14px;
     display: inline-block;
-    margin-right: 4px;
+    margin-right: 6px;
     border-radius: 8px;
-    border-color: $blue $blue $blue transparent;
+    border-color: $colorPrimary $colorPrimary $colorPrimary transparent;
     border-style: solid;
     border-width: 2px;
     animation: dm-spin 1s infinite linear;
+  }
+  &.dm-theme-primary {
+    > .dm-loadingIndicator {
+      border-color: #fff #fff #fff transparent;
+    }
+    &.dm-loading {
+      opacity: 0.8;
+      &:hover,
+      &:focus {
+        cursor: default;
+        background-color: $colorPrimary;
+      }
+    }
+  }
+  &.dm-theme-button {
+    &.dm-loading {
+      opacity: 0.8;
+      &:hover,
+      &:focus {
+        cursor: default;
+        color: $color;
+        border-color: $border-color;
+      }
+    }
   }
 }
 @keyframes dm-spin {
