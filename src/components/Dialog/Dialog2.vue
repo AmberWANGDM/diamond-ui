@@ -5,8 +5,8 @@
 
 <script lang="ts">
 import { h } from 'vue'
-import Button from '../lib/Button.vue'
-import { openDialog } from '../lib/showDialog'
+import Button from '../../lib/Button.vue'
+import { openDialog } from '../../lib/showDialog'
 
 export default {
   setup() {

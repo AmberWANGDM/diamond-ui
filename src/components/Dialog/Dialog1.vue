@@ -23,8 +23,8 @@
 
 <script lang="ts">
 import { ref } from 'vue'
-import Dialog from '../lib/Dialog.vue'
-import Button from '../lib/Button.vue'
+import Dialog from '../../lib/Dialog.vue'
+import Button from '../../lib/Button.vue'
 export default {
   setup() {
     const bool = ref(false)

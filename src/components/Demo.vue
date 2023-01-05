@@ -1,6 +1,10 @@
 <template>
   <div class="demo">
     <h2>{{ component.__sourceCodeTitle }}</h2>
+    <!--  描述  -->
+    <div>
+      <component :is="descComponent"></component>
+    </div>
     <div class="demo-component">
       <component :is="component"></component>
     </div>
@@ -26,7 +30,10 @@ import 'prismjs/themes/prism-one-dark.css'
 import { ref } from 'vue'
 
 export default {
-  props: { component: Object },
+  props: {
+    component: Object,
+    descComponent: Object,
+  },
   components: { Button },
   setup(props) {
     const Prism = (window as any).Prism
@@ -61,8 +68,6 @@ $border-color: #d9d9d9;
   }
   &-code {
     padding: 8px 6px;
-    height: fit-content;
-    font-family: 'Courier New', Courier, monospace;
     > pre {
       line-height: 1.1;
       font-family: Monaco;

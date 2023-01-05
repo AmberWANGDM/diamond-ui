@@ -10,8 +10,8 @@
 
 <script lang="ts">
 import { ref } from 'vue'
-import Button from '../lib/Button.vue'
-import Demo from './Demo.vue'
+import Button from '../../lib/Button.vue'
+import Demo from '../Demo.vue'
 import Button1 from './Button1.vue'
 import Button2 from './Button2.vue'
 import Button3 from './Button3.vue'

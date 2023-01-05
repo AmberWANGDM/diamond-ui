@@ -9,11 +9,11 @@
 </template>
 
 <script lang="ts">
-import Button from '../lib/Button.vue'
+import Button from '../../lib/Button.vue'
 import Switch1 from './Switch1.vue'
 import Switch2 from './Switch2.vue'
 import Switch3 from './Switch3.vue'
-import Demo from './Demo.vue'
+import Demo from '../Demo.vue'
 
 export default {
   components: { Button, Demo },

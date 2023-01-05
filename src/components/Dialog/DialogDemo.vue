@@ -5,10 +5,10 @@
 </template>
 
 <script lang="ts">
-import Demo from './Demo.vue'
+import Demo from '../Demo.vue'
 import Dialog1 from './Dialog1.vue'
 import Dialog2 from './Dialog2.vue'
-import Button from '../lib/Button.vue'
+import Button from '../../lib/Button.vue'
 export default {
   components: { Button, Demo },
   setup() {
