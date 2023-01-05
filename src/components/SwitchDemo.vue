@@ -11,7 +11,16 @@
         <Button>查看代码</Button>
       </div>
       <div class="demo-code">
-        <pre>{{ Switchbasic.__sourceCode }}</pre>
+        <pre
+          class="language-html"
+          v-html="
+            Prism.highlight(
+              Switchbasic.__sourceCode,
+              Prism.languages.html,
+              'html'
+            )
+          "
+        />
       </div>
     </div>
     <div class="demo">
@@ -43,13 +52,19 @@
 
 <script lang="ts">
 import { ref } from 'vue'
+import Button from '../lib/Button.vue'
 import Switchbasic from './Switchbasic.vue'
 import Switchsize from './Switchsize.vue'
 import Switchdisabled from './Switchdisabled.vue'
+import 'prismjs'
+import 'prismjs/themes/prism.css'
+
 export default {
+  components: { Button },
   setup() {
+    const Prism = (window as any).Prism
     const bool = ref(false)
-    return { bool, Switchbasic, Switchsize, Switchdisabled }
+    return { bool, Switchbasic, Switchsize, Switchdisabled, Prism }
   },
 }
 </script>
