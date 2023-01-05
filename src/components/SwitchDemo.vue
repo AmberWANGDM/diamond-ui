@@ -1,24 +1,24 @@
 <template>
   <div>
-    <h1>开关 Switch</h1>
+    <h1>Switch 开关</h1>
     <p>互斥性的操作控件，用户可打开或关闭某个功能。</p>
-    <Demo :component="Switchbasic" />
-    <Demo :component="Switchsize" />
-    <Demo :component="Switchdisabled" />
+    <Demo :component="Switch1" />
+    <Demo :component="Switch2" />
+    <Demo :component="Switch3" />
   </div>
 </template>
 
 <script lang="ts">
 import Button from '../lib/Button.vue'
-import Switchbasic from './Switchbasic.vue'
-import Switchsize from './Switchsize.vue'
-import Switchdisabled from './Switchdisabled.vue'
+import Switch1 from './Switch1.vue'
+import Switch2 from './Switch2.vue'
+import Switch3 from './Switch3.vue'
 import Demo from './Demo.vue'
 
 export default {
   components: { Button, Demo },
   setup() {
-    return { Switchbasic, Switchsize, Switchdisabled }
+    return { Switch1, Switch2, Switch3 }
   },
 }
 </script>

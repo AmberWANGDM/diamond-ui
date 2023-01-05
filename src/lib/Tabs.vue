@@ -94,7 +94,7 @@ export default {
 </script>
 
 <style lang="scss">
-$blue: #2d5cf6;
+$colorPrimary: #722ed1;
 $color: #333;
 $border-color: #d9d9d9;
 .dm-tabs {
@@ -114,13 +114,13 @@ $border-color: #d9d9d9;
       }
 
       &.selected {
-        color: $blue;
+        color: $colorPrimary;
       }
     }
     &-indicator {
       position: absolute;
       height: 3px;
-      background: $blue;
+      background: $colorPrimary;
       left: 0;
       bottom: -1px;
       transition: all 0.25s ease-in-out;

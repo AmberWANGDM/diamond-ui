@@ -5,18 +5,24 @@
       <component :is="component"></component>
     </div>
     <div class="demo-actions">
-      <Button @click="codeVisible = !codeVisible">code</Button>
+      <Button @click="codeVisible = !codeVisible">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-code"></use>
+        </svg>
+      </Button>
     </div>
-    <div class="demo-code" v-if="codeVisible">
-      <pre class="language-html" v-html="html" />
-    </div>
+    <Transition name="code">
+      <div class="demo-code" v-if="codeVisible">
+        <pre class="language-html" v-html="html" />
+      </div>
+    </Transition>
   </div>
 </template>
 
 <script lang="ts">
 import Button from '../lib/Button.vue'
 import 'prismjs'
-import 'prismjs/themes/prism.css'
+import 'prismjs/themes/prism-one-dark.css'
 import { ref } from 'vue'
 
 export default {
@@ -40,7 +46,7 @@ $border-color: #d9d9d9;
 .demo {
   margin: 16px 0 32px;
   > h2 {
-    margin: 48px 0 12px;
+    margin: 24px 0 12px;
     font-size: 20px;
     font-weight: 500;
   }
@@ -55,12 +61,24 @@ $border-color: #d9d9d9;
   }
   &-code {
     padding: 8px 6px;
-
+    height: fit-content;
+    font-family: 'Courier New', Courier, monospace;
     > pre {
       line-height: 1.1;
-      font-family: Consolas, 'Courier New', Courier, monospace;
+      font-family: Monaco;
+      font-size: 0.9em;
+      line-height: 1.5;
       margin: 0;
     }
+  }
+  .code-enter-active,
+  .code-leave-active {
+    transition: all 0.2s ease;
+  }
+  .code-enter-from,
+  .code-leave-to {
+    opacity: 0;
+    transform: translateY(30px);
   }
 }
 </style>
