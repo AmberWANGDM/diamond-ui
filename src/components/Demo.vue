@@ -26,7 +26,7 @@
 <script lang="ts">
 import Button from '../lib/Button.vue'
 import 'prismjs'
-import 'prismjs/themes/prism-one-dark.css'
+import 'prismjs/themes/prism.css'
 import { ref } from 'vue'
 
 export default {
