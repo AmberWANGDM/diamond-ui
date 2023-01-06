@@ -9,7 +9,13 @@
       <component :is="component"></component>
     </div>
     <div class="demo-actions">
-      <Button @click="codeVisible = !codeVisible">
+      <!-- 展示或隐藏代码 -->
+      <Button @click="codeVisible = true" v-if="!codeVisible">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-code"></use>
+        </svg>
+      </Button>
+      <Button theme="primary" @click="codeVisible = false" v-else>
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-code"></use>
         </svg>
