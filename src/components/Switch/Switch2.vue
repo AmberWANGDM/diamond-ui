@@ -1,7 +1,7 @@
 <demo>开关尺寸</demo>
 <template>
   <Switch v-model:value="bool" size="small" />
-  <Switch v-model:value="bool" size="medium" />
+  <Switch v-model:value="bool2" size="medium" />
 </template>
 
 <script lang="ts">
@@ -14,8 +14,10 @@ export default {
   },
   setup() {
     const bool = ref(false)
+    const bool2 = ref(false)
     return {
       bool,
+      bool2,
     }
   },
 }
