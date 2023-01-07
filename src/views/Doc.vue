@@ -26,6 +26,9 @@
           <li>
             <router-link to="/doc/tabs">Tabs 标签页</router-link>
           </li>
+          <li>
+            <router-link to="/doc/popover">Popover 弹出框</router-link>
+          </li>
         </ol>
       </aside>
       <main>
