@@ -21,49 +21,62 @@
   </template>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import Button from './Button.vue'
-export default {
-  props: {
-    visible: {
-      type: Boolean,
-      default: false,
-    },
-    closeOnClickOverlay: {
-      type: Boolean,
-      default: true,
-    },
-    ok: {
-      type: Function,
-    },
-    cancel: {
-      type: Function,
-    },
-  },
-  components: { Button },
-  setup(props, context) {
-    const close = () => {
-      context.emit('update:visible', false)
-    }
-    const onClickOverlay = () => {
-      if (props.closeOnClickOverlay) {
-        close()
-      }
-    }
-    const ok = () => {
-      // if (props.ok && props.ok() !== false) {
-      if (props.ok?.() !== false) {
-        close()
-      }
-    }
-    const cancel = () => {
-      // if (props.cancel && props.cancel() !== false) {
-      if (props.cancel?.() !== false) {
-        close()
-      }
-    }
-    return { close, onClickOverlay, ok, cancel }
-  },
+
+const props = withDefaults(
+  defineProps<{
+    /**
+     * 是否显示对话框
+     */
+    visible: boolean
+    /**
+     * 点击遮罩层是否关闭对话框
+     * @defaultValue true
+     */
+    closeOnClickOverlay?: boolean
+    /**
+     * 点击确定按钮时触发
+     * @defaultValue () => true
+     */
+    ok?: () => boolean | void
+    /**
+     * 点击取消按钮时触发
+     * @defaultValue () => true
+     */
+    cancel?: () => boolean | void
+  }>(),
+  {
+    visible: false,
+    closeOnClickOverlay: true,
+    ok: () => true,
+    cancel: () => true,
+  }
+)
+const emit = defineEmits<{
+  (e: 'update:visible', visible: boolean): void
+}>()
+
+const close = () => {
+  emit('update:visible', false)
+}
+
+const onClickOverlay = () => {
+  if (props.closeOnClickOverlay) {
+    close()
+  }
+}
+
+const ok = () => {
+  if (props.ok?.() !== false) {
+    close()
+  }
+}
+
+const cancel = () => {
+  if (props.cancel?.() !== false) {
+    close()
+  }
 }
 </script>
 <style lang="scss">

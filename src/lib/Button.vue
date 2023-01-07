@@ -10,68 +10,60 @@
   </button>
 </template>
 
-<script lang="ts">
-import { computed, PropType, toRefs } from 'vue'
-
-export default {
-  props: {
+<script setup lang="ts">
+import { computed, toRefs } from 'vue'
+const props = withDefaults(
+  defineProps<{
     /**
      * 按钮的类型，分为4种：默认按钮、主要按钮、链接按钮、文字按钮
      * @defaultValue 'button'
      */
-    theme: {
-      type: String as PropType<'button' | 'primary' | 'link' | 'text'>,
-      default: 'button',
-    },
+    theme?: 'button' | 'primary' | 'link' | 'text'
     /**
      * 按钮的尺寸：大，中，小
      * @defaultValue 'medium'
      */
-    size: {
-      type: String as PropType<'small' | 'large' | 'medium'>,
-      default: 'normal',
-    },
+    size?: 'small' | 'large' | 'medium'
     /**
      * 按钮状态：成功，警告，危险
      * @defaultValue 'normal'
      */
-    level: {
-      type: String as PropType<'normal' | 'warning' | 'success' | 'danger'>,
-      default: 'normal',
-    },
-    /**
-     * 按钮是否禁用
-     */
-    disabled: { type: Boolean, default: false },
-    /**
-     * 按钮是否为加载中状态
-     * 加载中按钮无法点击
-     */
-    loading: { type: Boolean, default: false },
-  },
-  // 点击Button组件时触发
-  emits: ['click'],
-  setup(props, { emit }) {
-    const { loading } = toRefs(props)
-    const { theme, size, level } = props
-    const classes = computed(() => {
-      return {
-        [`dm-theme-${theme}`]: theme,
-        [`dm-size-${size}`]: size,
-        [`dm-level-${level}`]: level,
-        'dm-loading': loading.value,
-      }
-    })
+    level?: 'normal' | 'warning' | 'success' | 'danger'
+    // 按钮是否禁用
+    disabled?: boolean
+    // 按钮是否为加载中状态
+    // 加载中按钮无法点击
+    loading?: boolean
+  }>(),
+  {
+    theme: 'button',
+    size: 'medium',
+    level: 'normal',
+    disabled: false,
+    loading: false,
+  }
+)
 
-    const handleClick = (e) => {
-      if (props.disabled || props.loading) {
-        e.preventDefault()
-        return
-      }
-      emit('click', e)
-    }
-    return { classes, handleClick }
-  },
+// 点击Button组件时触发
+const emit = defineEmits<{
+  (e: 'click', event: MouseEvent): void
+}>()
+
+const classes = computed(() => {
+  return {
+    [`dm-theme-${props.theme}`]: props.theme,
+    [`dm-size-${props.size}`]: props.size,
+    [`dm-level-${props.level}`]: props.level,
+    'dm-loading': props.loading,
+  }
+})
+
+const handleClick = (e: MouseEvent) => {
+  if (props.disabled || props.loading) {
+    e.preventDefault()
+    return
+  }
+  emit('click', e)
 }
 </script>
 

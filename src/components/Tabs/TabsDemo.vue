@@ -3,17 +3,7 @@
   <Demo :component="Tabs1" />
 </template>
 
-<script lang="ts">
-import Tabs1 from './Tabs1.vue'
+<script setup lang="ts">
+import Tabs1 from './Tabs1.demo.vue'
 import Demo from '../Demo.vue'
-import { ref } from 'vue'
-export default {
-  components: {
-    Demo,
-  },
-  setup() {
-    const selectedTitle = ref('Tab1')
-    return { selectedTitle, Tabs1 }
-  },
-}
 </script>

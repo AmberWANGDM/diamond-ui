@@ -41,7 +41,7 @@
 
 <script lang="ts">
 import { inject, Ref } from 'vue'
-import { RouterLink } from 'vue-router'
+import { RouterLink, RouterView } from 'vue-router'
 import Topnav from '../components/Topnav.vue'
 
 export default {

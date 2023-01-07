@@ -8,19 +8,11 @@
   </div>
 </template>
 
-<script lang="ts">
-import Button from '../../lib/Button.vue'
-import Switch1 from './Switch1.vue'
-import Switch2 from './Switch2.vue'
-import Switch3 from './Switch3.vue'
+<script setup lang="ts">
+import Switch1 from './Switch1.demo.vue'
+import Switch2 from './Switch2.demo.vue'
+import Switch3 from './Switch3.demo.vue'
 import Demo from '../Demo.vue'
-
-export default {
-  components: { Button, Demo },
-  setup() {
-    return { Switch1, Switch2, Switch3 }
-  },
-}
 </script>
 
 <style lang="scss" scoped>

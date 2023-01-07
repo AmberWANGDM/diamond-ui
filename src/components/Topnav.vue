@@ -15,8 +15,9 @@
         <a href="https://github.com/AmberWANGDM/diamond-ui">
           Github
           <svg class="icon">
-            <use xlink:href="#icon-tiaozhuan"></use></svg
-        ></a>
+            <use xlink:href="#icon-tiaozhuan"></use>
+          </svg>
+        </a>
       </li>
     </ul>
     <span

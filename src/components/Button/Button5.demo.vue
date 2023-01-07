@@ -23,7 +23,7 @@ export default {
     const handleClick1 = () => {
       loading1.value = !loading1.value
     }
-    const handleClick2 = (e) => {
+    const handleClick2 = () => {
       loading2.value = !loading2.value
     }
 

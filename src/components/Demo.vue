@@ -1,10 +1,10 @@
 <template>
   <div class="demo">
     <h2>{{ component.__sourceCodeTitle }}</h2>
-    <!--  描述  -->
+    <!-- 描述 
     <div>
       <component :is="descComponent"></component>
-    </div>
+    </div> -->
     <div class="demo-component">
       <component :is="component"></component>
     </div>
@@ -29,29 +29,23 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import Button from '../lib/Button.vue'
 import 'prismjs'
 import 'prismjs/themes/prism.css'
 import { ref } from 'vue'
+const props = defineProps<{
+  component: any
+  // descComponent: any
+}>()
 
-export default {
-  props: {
-    component: Object,
-    descComponent: Object,
-  },
-  components: { Button },
-  setup(props) {
-    const Prism = (window as any).Prism
-    const codeVisible = ref(false)
-    const html = Prism.highlight(
-      props.component.__sourceCode,
-      Prism.languages.html,
-      'html'
-    )
-    return { Prism, html, codeVisible }
-  },
-}
+const Prism = (window as any).Prism
+const codeVisible = ref(false)
+const html = Prism.highlight(
+  props.component.__sourceCode,
+  Prism.languages.html,
+  'html'
+)
 </script>
 
 <style lang="scss" scoped>

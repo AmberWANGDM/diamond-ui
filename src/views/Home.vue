@@ -36,11 +36,8 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import Topnav from '../components/Topnav.vue'
-export default {
-  components: { Topnav },
-}
 </script>
 
 <style lang="scss" scoped>

@@ -9,34 +9,31 @@
   </button>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { computed } from 'vue'
 
-export default {
-  props: {
-    value: Boolean,
-    size: {
-      type: String,
-      default: 'medium',
-    },
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
+const props = defineProps({
+  value: Boolean,
+  size: {
+    type: String,
+    default: 'medium',
   },
-  setup(props, context) {
-    const toggle = () => {
-      context.emit('update:value', !props.value)
-    }
-    const classObject = computed(() => {
-      return {
-        'dm-checked': props.value,
-        [`dm-size-${props.size}`]: props.size,
-      }
-    })
-    return { toggle, classObject }
+  disabled: {
+    type: Boolean,
+    default: false,
   },
+})
+// 使用纯类型标注来声明触发的事件
+const emit = defineEmits<{ (e: 'update:value', value: boolean): void }>()
+const toggle = () => {
+  emit('update:value', !props.value)
 }
+const classObject = computed(() => {
+  return {
+    'dm-checked': props.value,
+    [`dm-size-${props.size}`]: props.size,
+  }
+})
 </script>
 
 <style lang="scss" scoped>

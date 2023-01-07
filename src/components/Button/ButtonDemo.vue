@@ -8,40 +8,11 @@
   <Demo :component="Button5" />
 </template>
 
-<script lang="ts">
-import { ref } from 'vue'
-import Button from '../../lib/Button.vue'
+<script setup lang="ts">
 import Demo from '../Demo.vue'
-import Button1 from './Button1.vue'
-import Button2 from './Button2.vue'
-import Button3 from './Button3.vue'
-import Button4 from './Button4.vue'
-import Button5 from './Button5.vue'
-export default {
-  components: { Button, Demo },
-  setup() {
-    const loading1 = ref(false)
-    const loading2 = ref(false)
-
-    const handleClick1 = () => {
-      loading1.value = !loading1.value
-    }
-    const handleClick2 = (e) => {
-      console.log(e)
-      loading2.value = !loading2.value
-    }
-
-    return {
-      loading1,
-      loading2,
-      handleClick1,
-      handleClick2,
-      Button1,
-      Button2,
-      Button3,
-      Button4,
-      Button5,
-    }
-  },
-}
+import Button1 from './Button1.demo.vue'
+import Button2 from './Button2.demo.vue'
+import Button3 from './Button3.demo.vue'
+import Button4 from './Button4.demo.vue'
+import Button5 from './Button5.demo.vue'
 </script>

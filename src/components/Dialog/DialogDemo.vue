@@ -4,15 +4,8 @@
   <Demo :component="Dialog2" />
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import Demo from '../Demo.vue'
-import Dialog1 from './Dialog1.vue'
-import Dialog2 from './Dialog2.vue'
-import Button from '../../lib/Button.vue'
-export default {
-  components: { Button, Demo },
-  setup() {
-    return { Dialog1, Dialog2 }
-  },
-}
+import Dialog1 from './Dialog1.demo.vue'
+import Dialog2 from './Dialog2.demo.vue'
 </script>
