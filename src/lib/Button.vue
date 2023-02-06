@@ -1,10 +1,5 @@
 <template>
-  <button
-    class="dm-btn"
-    :class="classes"
-    :disabled="disabled"
-    @click="handleClick"
-  >
+  <button class="dm-btn" :class="classes" :disabled="disabled" @click="handleClick">
     <span v-if="loading" class="dm-loadingIndicator"></span>
     <slot />
   </button>
@@ -67,7 +62,7 @@ const handleClick = (e: MouseEvent) => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 $h: 28px;
 $border-color: #d9d9d9;
 $color: #333;
@@ -264,7 +259,7 @@ $colorDanger: #ff4d4f;
     height: 14px;
     display: inline-block;
     margin-right: 6px;
-    border-radius: 8px;
+    border-radius: 50%;
     border-color: $colorPrimary $colorPrimary $colorPrimary transparent;
     border-style: solid;
     border-width: 2px;

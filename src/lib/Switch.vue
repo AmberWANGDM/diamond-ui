@@ -1,10 +1,5 @@
 <template>
-  <button
-    class="dm-switch"
-    @click="toggle"
-    :class="classObject"
-    :disabled="disabled"
-  >
+  <button class="dm-switch" @click="toggle" :class="classObject" :disabled="disabled">
     <span></span>
   </button>
 </template>
@@ -24,6 +19,8 @@ const props = defineProps({
   },
 })
 // 使用纯类型标注来声明触发的事件
+// 调用签名，参数和返回值之间是:，而不是函数类型表达式中使用的 =>
+// 参考 https://yayujs.com/handbook/MoreOnFunctions.html#%E5%87%BD%E6%95%B0-more-on-functions
 const emit = defineEmits<{ (e: 'update:value', value: boolean): void }>()
 const toggle = () => {
   emit('update:value', !props.value)
@@ -36,7 +33,7 @@ const classObject = computed(() => {
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 $h: 22px;
 $h2: $h - 6px;
 $colorPrimary: #722ed1;

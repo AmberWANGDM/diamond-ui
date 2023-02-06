@@ -4,9 +4,7 @@
   <div>
     <Button theme="primary" loading>加载中</Button>
     <Button loading>加载中</Button>
-    <Button theme="primary" :loading="loading1" @click="handleClick1"
-      >Click me</Button
-    >
+    <Button theme="primary" :loading="loading1" @click="handleClick1">Click me</Button>
     <Button :loading="loading2" @click="handleClick2">Click me</Button>
   </div>
 </template>

@@ -50,25 +50,31 @@ const html = Prism.highlight(
 
 <style lang="scss" scoped>
 $border-color: #d9d9d9;
+
 .demo {
   margin: 16px 0 32px;
-  > h2 {
+
+  >h2 {
     margin: 24px 0 12px;
     font-size: 20px;
     font-weight: 500;
   }
+
   &-component {
     padding: 48px;
     border: 1px solid $border-color;
   }
+
   &-actions {
     margin-top: 12px;
     display: flex;
     justify-content: flex-end;
   }
+
   &-code {
     padding: 8px 6px;
-    > pre {
+
+    >pre {
       line-height: 1.1;
       font-family: Monaco;
       font-size: 0.9em;
@@ -76,10 +82,12 @@ $border-color: #d9d9d9;
       margin: 0;
     }
   }
+
   .code-enter-active,
   .code-leave-active {
     transition: all 0.2s ease;
   }
+
   .code-enter-from,
   .code-leave-to {
     opacity: 0;

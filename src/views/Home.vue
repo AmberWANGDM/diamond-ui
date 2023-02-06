@@ -3,7 +3,7 @@
     <Topnav class="homeTopnav" />
     <div class="banner">
       <h1>Diamond-UI</h1>
-      <h3>一个基于Vue的 UI 组件库</h3>
+      <h3>一个基于 Vue 的 UI 组件库</h3>
       <p class="actions">
         <router-link to="/doc/get-started">快速上手</router-link>
       </p>
@@ -46,12 +46,7 @@ import Topnav from '../components/Topnav.vue'
   border-bottom: none;
 }
 .topnavAndBanner {
-  background-image: linear-gradient(
-    to top,
-    #f3e7e9 0%,
-    #e3eeff 99%,
-    #e3eeff 100%
-  );
+  background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
   clip-path: ellipse(80% 60% at 50% 40%);
 }
 

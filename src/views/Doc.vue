@@ -2,35 +2,37 @@
   <div class="layout">
     <Topnav toggleMenuButtonVisible class="nav" />
     <div class="content">
-      <aside v-if="asideVisible">
-        <span>开始</span>
-        <ol>
-          <li>
-            <router-link to="/doc/intro">简介</router-link>
-          </li>
-          <li>
-            <router-link to="/doc/get-started">快速上手</router-link>
-          </li>
-        </ol>
-        <span>组件列表</span>
-        <ol>
-          <li>
-            <router-link to="/doc/switch">Switch 开关</router-link>
-          </li>
-          <li>
-            <router-link to="/doc/button">Button 按钮</router-link>
-          </li>
-          <li>
-            <router-link to="/doc/dialog">Dialog 对话框</router-link>
-          </li>
-          <li>
-            <router-link to="/doc/tabs">Tabs 标签页</router-link>
-          </li>
-          <li>
-            <router-link to="/doc/popover">Popover 弹出框</router-link>
-          </li>
-        </ol>
-      </aside>
+      <Transition>
+        <aside v-if="asideVisible">
+          <span>开始</span>
+          <ol>
+            <li>
+              <router-link to="/doc/intro">简介</router-link>
+            </li>
+            <li>
+              <router-link to="/doc/get-started">快速上手</router-link>
+            </li>
+          </ol>
+          <span>组件列表</span>
+          <ol>
+            <li>
+              <router-link to="/doc/switch">Switch 开关</router-link>
+            </li>
+            <li>
+              <router-link to="/doc/button">Button 按钮</router-link>
+            </li>
+            <li>
+              <router-link to="/doc/dialog">Dialog 对话框</router-link>
+            </li>
+            <li>
+              <router-link to="/doc/tabs">Tabs 标签页</router-link>
+            </li>
+            <li>
+              <router-link to="/doc/popover">Popover 弹出框</router-link>
+            </li>
+          </ol>
+        </aside>
+      </Transition>
       <main>
         <!-- 组件Demo -->
         <router-view></router-view>
@@ -86,7 +88,10 @@ $colorBg: #fafafa;
 }
 .content {
   display: flex;
+  position: relative;
+
   > aside {
+    position: absolute;
     flex-shrink: 0;
   }
   > main {
@@ -94,7 +99,14 @@ $colorBg: #fafafa;
     padding: 16px;
   }
 }
-
+.v-enter-from,
+.v-leave-to {
+  left: -150px;
+}
+.v-enter-active,
+.v-leave-active {
+  transition: left 0.5s;
+}
 aside {
   border-right: 1px solid $colorBorder;
   background-color: $colorBg;
