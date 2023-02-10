@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import Switch from '../../lib/Switch.vue'
+import { Switch } from 'diamond-vue-ui'
 import { ref } from 'vue'
 const bool = ref(false)
 </script>

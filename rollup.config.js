@@ -1,5 +1,5 @@
 // 请先安装 rollup-plugin-esbuild @vitejs/plugin-vue rollup-plugin-scss sass rollup-plugin-terser
-// 为了保证版本一致，请复制我的 package.json 到你的项目，并把 name 改成你的库名
+
 import esbuild from 'rollup-plugin-esbuild'
 import vue from '@vitejs/plugin-vue'
 import scss from 'rollup-plugin-scss'
@@ -7,14 +7,14 @@ import dartSass from 'sass'
 import { terser } from 'rollup-plugin-terser'
 
 export default {
-  input: 'src/lib/index.ts',
+  input: 'src/lib/index.ts', // 入口文件地址
   output: {
     globals: {
-      vue: 'Vue',
+      vue: 'Vue', // 指明global.Vue即是外部依赖vue
     },
     name: 'Diamond-UI',
-    file: 'dist/lib/diamond-ui.js',
-    format: 'umd',
+    file: 'dist/lib/diamond-ui.js', // 输出文件到何处
+    format: 'umd', // 使用什么样的模块化机制
     plugins: [terser()],
   },
   plugins: [

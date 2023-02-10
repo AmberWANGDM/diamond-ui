@@ -1,30 +1,14 @@
 <template>
   <div class="dm-tabs">
     <div class="dm-tabs-nav" ref="container">
-      <div
-        class="dm-tabs-nav-item"
-        :class="{ selected: t === selected }"
-        @click="select(t)"
-        :ref="
-          (el) => {
-            //@ts-ignore
-            if (t === selected) selectedItem = el
-          }
-        "
-        v-for="(t, index) in titles"
-        :key="index"
-      >
+      <div class="dm-tabs-nav-item" :class="{ selected: t === selected }" v-for="(t, index) in titles" :key="index"
+        @click="select(t)" :ref="(el)=>{if(t===selected)selectedItem=el}">
         {{ t }}
       </div>
       <div class="dm-tabs-nav-indicator" ref="indicator"></div>
     </div>
     <div class="dm-tabs-content">
-      <!-- 更新<component :is="VNode">内部插槽必须传key -->
-      <component
-        class="dm-tabs-content-item"
-        :is="current"
-        :key="current.props.title"
-      ></component>
+      <component :is="current" :key="current.props.title"></component>
     </div>
   </div>
 </template>
@@ -50,20 +34,20 @@ const emit = defineEmits<{
 const slots = useSlots() // 获取插槽
 const defaults = slots.default() // 获取子组件
 // 检查子组件类型是否符合要求
-defaults.forEach((tag) => {
-  if (tag.type !== Tab) {
+defaults.forEach((tab) => {
+  if (tab.type !== Tab) {
     throw new Error('Tabs子标签必须为Tab')
   }
 })
 // 显示对应的内容
 const current = computed(() => {
-  return defaults.filter((tag) => {
-    return tag.props.title === props.selected
+  return defaults.filter((tab) => {
+    return tab.props.title === props.selected
   })[0]
 })
 // 获取标签名以展示
-const titles = defaults.map((tag) => {
-  return tag.props.title
+const titles = defaults.map((tab) => {
+  return tab.props.title
 })
 // 切换
 const select = (title: string) => {
@@ -92,6 +76,7 @@ onMounted(() => {
 $colorPrimary: #722ed1;
 $color: #333;
 $border-color: #d9d9d9;
+
 .dm-tabs {
   &-nav {
     display: flex;
@@ -112,6 +97,7 @@ $border-color: #d9d9d9;
         color: $colorPrimary;
       }
     }
+
     &-indicator {
       position: absolute;
       height: 3px;

@@ -30,6 +30,9 @@
             <li>
               <router-link to="/doc/popover">Popover 弹出框</router-link>
             </li>
+            <li>
+              <router-link to="/doc/input">Input 输入框</router-link>
+            </li>
           </ol>
         </aside>
       </Transition>
@@ -62,51 +65,62 @@ $gray: #595959;
 $colorPrimaryBgHover: #ebebeb;
 $colorBorder: #f0f0f0;
 $colorBg: #fafafa;
+
 .router-link-active {
   color: #865cc1;
   background-color: #f4ebfa;
   border-radius: 8px;
+
   &:hover {
     background-color: #f4ebfa;
   }
 }
+
 .layout {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  > .nav {
+
+  >.nav {
     flex-shrink: 0;
   }
-  > .content {
+
+  >.content {
     flex-grow: 1;
     padding-top: 60px;
     padding-left: 187px;
+
     @media (max-width: 500px) {
       padding-left: 0;
     }
   }
 }
+
 .content {
   display: flex;
   position: relative;
 
-  > aside {
+  >aside {
     position: absolute;
     flex-shrink: 0;
   }
-  > main {
+
+  >main {
     flex-grow: 1;
     padding: 16px;
   }
 }
+
 .v-enter-from,
 .v-leave-to {
   left: -150px;
 }
+
 .v-enter-active,
 .v-leave-active {
   transition: left 0.5s;
 }
+
 aside {
   border-right: 1px solid $colorBorder;
   background-color: $colorBg;
@@ -118,21 +132,26 @@ aside {
   padding-top: 80px;
   height: 100%;
   z-index: 2;
-  > span {
+
+  >span {
     color: $gray;
   }
-  > ol {
+
+  >ol {
     margin-top: 8px;
     margin-bottom: 24px;
-    > li {
+
+    >li {
       margin-top: 2px;
       font-size: 14px;
-      > a {
+
+      >a {
         display: inline-block;
         padding: 5px;
         padding-left: 12px;
         width: 100%;
         transition: background-color 0.25s;
+
         &:hover {
           background-color: $colorPrimaryBgHover;
           border-radius: 5px;

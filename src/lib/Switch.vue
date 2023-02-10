@@ -40,6 +40,7 @@ $colorPrimary: #722ed1;
 $colorPrimaryHover: #9254de;
 $gray: #bfbfbf;
 $grayHover: #8c8c8c;
+
 .dm-switch {
   height: $h;
   width: $h * 2;
@@ -49,10 +50,12 @@ $grayHover: #8c8c8c;
   position: relative;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  & + & {
+
+  &+& {
     margin-left: 24px;
   }
-  > span {
+
+  >span {
     position: absolute;
     top: 3px;
     left: 3px;
@@ -62,28 +65,35 @@ $grayHover: #8c8c8c;
     border-radius: calc($h / 2);
     transition: all 0.2s ease-in;
   }
+
   &:hover {
     background: $grayHover;
   }
+
   &.dm-checked {
     background-color: $colorPrimary;
-    > span {
+
+    >span {
       left: calc(100% - #{$h2} - 3px);
     }
+
     &:hover {
       background-color: $colorPrimaryHover;
     }
   }
+
   &:focus {
     outline: none;
   }
+
   &:active {
-    > span {
+    >span {
       width: $h2 + 5px;
     }
   }
+
   &.dm-checked:active {
-    > span {
+    >span {
       width: $h2 + 5px;
       margin-left: -5px;
     }
@@ -92,27 +102,32 @@ $grayHover: #8c8c8c;
   &.dm-size-small {
     height: $h - 4px;
     width: $h * 2 - 12px;
-    > span {
+
+    >span {
       height: $h2 - 4px;
       width: 12px;
     }
+
     &:active {
-      > span {
+      >span {
         width: $h2;
       }
     }
+
     &.dm-checked {
-      > span {
+      >span {
         left: calc(100% - #{$h2} + 1px);
       }
     }
+
     &.dm-checked:active {
-      > span {
+      >span {
         width: $h2;
         margin-left: -4px;
       }
     }
   }
+
   &[disabled] {
     cursor: not-allowed;
     opacity: 0.6;

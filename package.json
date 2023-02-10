@@ -1,6 +1,6 @@
 {
   "name": "diamond-vue-ui",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "files": [
     "dist/lib/*"
   ],
@@ -25,5 +25,8 @@
     "vite": "3.0.9",
     "vue": "3.2.37",
     "vue-router": "^4.1.6"
+  },
+  "dependencies": {
+    "diamond-vue-ui": "^0.0.2"
   }
 }

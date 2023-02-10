@@ -4,7 +4,7 @@
     
 造轮子其实就是一种学习，这是我在学习Vue过程中开发的一个简单的UI框架，包括你现在看到的这个官网也几乎都是我自己写的。
 
-目前包括有 Button、Tabs、Dialog、Switch组件。
+目前包括有 Button、Tabs、Dialog、Switch、Popvover组件。
 
 ## 基本信息
     
