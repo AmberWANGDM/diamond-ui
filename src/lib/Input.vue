@@ -40,7 +40,7 @@ $placeholderColor: #c0c0c0;
     cursor: text;
     background: none;
     border: none;
-    border-radius: 0;
+    border-radius: 3px;
     outline: 1px solid transparent;
     background-color: $gray;
     padding-top: 4px;
