@@ -5,6 +5,8 @@
     <Demo :component="Switch1" />
     <Demo :component="Switch2" />
     <Demo :component="Switch3" />
+    <h2>API</h2>
+    <AttrTable :attrs="attrs" title="属性" />
   </div>
 </template>
 
@@ -13,30 +15,41 @@ import Switch1 from './Switch1.demo.vue'
 import Switch2 from './Switch2.demo.vue'
 import Switch3 from './Switch3.demo.vue'
 import Demo from '../Demo.vue'
+import AttrTable from '../AttrTable.vue'
+
+const attrs = [
+  { name: 'size', info: '控制开关尺寸', type: 'string', default: 'medium' },
+  { name: 'disabled', info: '控制开关是否禁用', type: 'boolean', default: 'false' }
+]
 </script>
 
 <style lang="scss" scoped>
 $border-color: #d9d9d9;
+
 .demo {
   margin: 16px 0 32px;
-  > h2 {
+
+  >h2 {
     margin: 48px 0 12px;
     font-size: 20px;
     font-weight: 500;
   }
+
   &-component {
     padding: 48px;
     border: 1px solid $border-color;
   }
+
   &-actions {
     margin-top: 12px;
     display: flex;
     justify-content: flex-end;
   }
+
   &-code {
     padding: 8px 6px;
 
-    > pre {
+    >pre {
       line-height: 1.1;
       font-family: Consolas, 'Courier New', Courier, monospace;
       margin: 0;
