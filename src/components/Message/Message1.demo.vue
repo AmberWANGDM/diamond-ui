@@ -25,5 +25,5 @@
 
 <script setup lang="ts">
 import Button from '../../lib/Button.vue';
-import Message from '../../lib/Message.vue'
+import Message from '../../lib/Message'
 </script>
