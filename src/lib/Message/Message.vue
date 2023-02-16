@@ -1,6 +1,6 @@
 <template>
   <transition name="dm-message-fade">
-    <div :class="styleClass" v-show="refVisible">{{ message }}</div>
+    <div :class="styleClass" v-show="refVisible" :style="{ top: refTop + 'px' }">{{ message }}</div>
   </transition>
 </template>
 
@@ -36,9 +36,18 @@ const setVisible = (visible: boolean) => {
   })
 }
 
+const height = 40
+const margin = 20
+const refTop = ref(20)
+const setTop = (top: number) => {
+  refTop.value = top
+}
 defineExpose({
   refVisible,
-  setVisible
+  setVisible,
+  height,
+  margin,
+  setTop
 })
 </script>
 
@@ -47,14 +56,14 @@ defineExpose({
   position: fixed;
   z-index: 20;
   left: 50%;
-  width: 380px;
+  padding: 0 20px;
   height: 40px;
-  margin-left: -190px;
-  top: 20px;
   border-radius: 5px;
   text-align: center;
   font-size: 14px;
   line-height: 40px;
+  transform: translate(-50%, 0);
+  transition: top 0.3s ease-out;
 
   &-success {
     background-color: #d1edc4;
@@ -83,7 +92,7 @@ defineExpose({
 
 .dm-message-fade-enter-from,
 .dm-message-fade-leave-to {
-  transform: translateY(-20px);
+  transform: translate(-50%, -20px);
   opacity: 0;
 }
 
