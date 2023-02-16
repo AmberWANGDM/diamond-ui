@@ -30,9 +30,11 @@ function showMessage(app: App<Element>, duration: number) {
 }
 // 隐藏消息
 function hideMessage(app: App<Element>, duration: number, vm) {
-  setTimeout(async () => {
+  vm.timer = setTimeout(async () => {
     await vm.setVisible(false)
     app.unmount()
+    clearTimeout(vm.timer)
+    vm.timer = null
   }, duration || 3000)
 }
 export default Message

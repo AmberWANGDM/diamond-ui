@@ -24,11 +24,14 @@ const props = defineProps({
 const styleClass = computed(() => ['dm-message', `dm-message-${props.type}`])
 
 const refVisible = ref(false)
+let t = null
 const setVisible = (visible: boolean) => {
   return new Promise(resolve => {
     refVisible.value = visible
-    setTimeout(() => {
+    t = setTimeout(() => {
       resolve('')
+      clearTimeout(t)
+      t = null
     }, 300);
   })
 }
