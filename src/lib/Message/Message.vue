@@ -1,11 +1,11 @@
 <template>
   <transition name="dm-message-fade">
-    <div :class="styleClass">{{ message }}</div>
+    <div :class="styleClass" v-show="refVisible">{{ message }}</div>
   </transition>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref, defineExpose } from 'vue';
 import types from './types'
 const props = defineProps({
   type: {
@@ -22,6 +22,16 @@ const props = defineProps({
 })
 
 const styleClass = computed(() => ['dm-message', `dm-message-${props.type}`])
+
+const refVisible = ref(false)
+const setVisible = (visible: boolean) => {
+  refVisible.value = visible
+}
+
+defineExpose({
+  refVisible,
+  setVisible
+})
 </script>
 
 <style lang="scss">
@@ -32,7 +42,7 @@ const styleClass = computed(() => ['dm-message', `dm-message-${props.type}`])
   width: 380px;
   height: 40px;
   margin-left: -190px;
-  top: 100px;
+  top: 20px;
   border-radius: 5px;
   text-align: center;
   font-size: 14px;
@@ -61,5 +71,19 @@ const styleClass = computed(() => ['dm-message', `dm-message-${props.type}`])
     border: 1px solid #f89898;
     color: #c45656;
   }
+}
+
+.dm-message-fade-enter-from,
+.dm-message-fade-leave-to {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+
+.dm-message-fade-enter-active {
+  transition: all 0.3s ease-in;
+}
+
+.dm-message-fade-leave-active {
+  transition: all 0.3s ease-out;
 }
 </style>

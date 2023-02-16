@@ -23,8 +23,9 @@ Object.values(types).forEach(type => {
 function showMessage(app: App<Element>, duration: number) {
   // 不用外面包裹 div
   const oFrag = document.createDocumentFragment()
-  app.mount(oFrag)
+  const vm = app.mount(oFrag)
   document.body.appendChild(oFrag)
+  vm.setVisible(true)
   hideMessage(app, duration)
 }
 // 隐藏消息
