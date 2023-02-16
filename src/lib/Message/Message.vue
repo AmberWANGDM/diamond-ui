@@ -25,7 +25,12 @@ const styleClass = computed(() => ['dm-message', `dm-message-${props.type}`])
 
 const refVisible = ref(false)
 const setVisible = (visible: boolean) => {
-  refVisible.value = visible
+  return new Promise(resolve => {
+    refVisible.value = visible
+    setTimeout(() => {
+      resolve('')
+    }, 300);
+  })
 }
 
 defineExpose({

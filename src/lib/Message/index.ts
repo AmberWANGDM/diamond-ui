@@ -26,11 +26,12 @@ function showMessage(app: App<Element>, duration: number) {
   const vm = app.mount(oFrag)
   document.body.appendChild(oFrag)
   vm.setVisible(true)
-  hideMessage(app, duration)
+  hideMessage(app, duration, vm)
 }
 // 隐藏消息
-function hideMessage(app: App<Element>, duration: number) {
-  setTimeout(() => {
+function hideMessage(app: App<Element>, duration: number, vm) {
+  setTimeout(async () => {
+    await vm.setVisible(false)
     app.unmount()
   }, duration || 3000)
 }
