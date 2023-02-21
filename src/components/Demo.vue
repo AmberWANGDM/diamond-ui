@@ -9,20 +9,28 @@
       <component :is="component"></component>
     </div>
     <div class="demo-actions">
+      <!-- 复制粘贴代码片段 -->
+      <Button class="copyBtn" :data-clipboard-text="component.__sourceCode" @click="copyCode">拷贝代码</Button>
+
       <!-- 展示或隐藏代码 -->
-      <Button @click="codeVisible = true" v-if="!codeVisible">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-code"></use>
-        </svg>
-      </Button>
-      <Button theme="primary" @click="codeVisible = false" v-else>
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-code"></use>
-        </svg>
-      </Button>
+      <Popover trigger="hover">
+        <template #content>
+          示例
+        </template>
+        <Button @click="codeVisible = true" v-if="!codeVisible">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-code"></use>
+          </svg>
+        </Button>
+        <Button theme="primary" @click="codeVisible = false" v-else>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-code"></use>
+          </svg>
+        </Button>
+      </Popover>
     </div>
     <Transition name="code">
-      <div class="demo-code" v-if="codeVisible">
+      <div id="code" class="demo-code" v-if="codeVisible">
         <pre class="language-html" v-html="html" />
       </div>
     </Transition>
@@ -31,9 +39,12 @@
 
 <script setup lang="ts">
 import Button from '../lib/Button.vue'
+import Popover from '../lib/Popover.vue'
+import Message from '../lib/Message'
 import 'prismjs'
 import 'prismjs/themes/prism.css'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import Clipboard from 'clipboard'
 const props = defineProps<{
   component: any
   // descComponent: any
@@ -46,6 +57,27 @@ const html = Prism.highlight(
   Prism.languages.html,
   'html'
 )
+
+let clipboard
+onMounted(() => {
+  clipboard = new Clipboard('.copyBtn')
+})
+const copyCode = () => {
+  clipboard.on('success', () => {
+    Message({
+      type: 'success',
+      message: '复制成功'
+    })
+    clipboard.destroy();
+  })
+  clipboard.on('error', () => {
+    Message({
+      type: 'error',
+      message: '复制失败'
+    })
+    clipboard.destroy();
+  })
+}
 </script>
 
 <style lang="scss" scoped>
